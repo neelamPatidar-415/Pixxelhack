@@ -121,34 +121,15 @@
     .p1.animate .img1 { transform: translateX(-100%); }
     .p1.animate .img2 { transform: translateX(-100%); }
 
-    /* SECOND PARENT: image 1 on top, img2 behind img1, img3 on the right */
-    .p2 .img1 {
-      left: 0; width: 50%;
-      background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca');
-      /* image 1 on top */
-      z-index: 3;
-    }
-    .p2 .img2 {
-      left: 0; width: 50%;
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
-      /* behind image 1 and img3 */
-      z-index: 1;
-    }
-    .p2 .img3 {
-      right: 0; width: 50%; height: 100%;
-      background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc');
-      z-index: 2;
-      pointer-events: none;
-    }
+  .p2 .img1 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index:3; }
+  .p2 .img2 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index:1; }
+  .p2 .img3 { right:0; width:50%; height:100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index:2; pointer-events:none; }
+  .p2.animate .img2 { transform: translateX(100%); }
+  .p2.animate .img3 { transform: translateX(100%); }
 
-    /* Animate both img2 and img3 to the right together */
-    .p2.animate .img2 {
-      transform: translateX(100%);
-    }
-    .p2.animate .img3 {
-      transform: translateX(100%);
-    }
-  </style>
+  /* subtle glow border to fit theme */
+  .parent { box-shadow: 0 10px 40px -10px rgba(255,60,172,0.3); border-radius: 1rem; }
+</style>
 
 
 </head>
