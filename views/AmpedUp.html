@@ -67,33 +67,88 @@
         transform: translateY(-400%);
       }  
     }
+
+
+    /* /for image preview , team member feature  */
+    #hover-img img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+#hover-img {
+  z-index: 9999 !important;
+}
   </style>
 
 
-<!-- image slider -->
- <style>
-  .parent { position: relative; overflow: hidden; }
-  .img {
-    position: absolute; top: 0; bottom: 0;
-    background-size: cover;
-    background-position: center;
-    transition: transform 1s cubic-bezier(0.77,0,0.175,1);
-  }
-  .p1 .img1 { left: 0; width: 50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index:1; }
-  .p1 .img2 { left: 50%; width: 50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index:1; }
-  .p1 .img3 { right: 0; width: 50%; height:100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index:2; pointer-events:none; }
-  .p1.animate .img1 { transform: translateX(-100%); }
-  .p1.animate .img2 { transform: translateX(-100%); }
 
-  .p2 .img1 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index:3; }
-  .p2 .img2 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index:1; }
-  .p2 .img3 { right:0; width:50%; height:100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index:2; pointer-events:none; }
-  .p2.animate .img2 { transform: translateX(100%); }
-  .p2.animate .img3 { transform: translateX(100%); }
 
-  /* subtle glow border to fit theme */
-  .parent { box-shadow: 0 10px 40px -10px rgba(255,60,172,0.3); border-radius: 1rem; }
-</style>
+<!-- image grid styling  -->
+  <style>
+    #image-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      pt-0
+    }
+    .parent {
+      position: relative;
+      width: 600px;
+      height: 300px;
+      overflow: hidden;
+      /* margin-top: 100vh; */
+       /* For demo scroll */
+      background: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    /* Shared styles */
+    .img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    /* FIRST PARENT: the original animation */
+    .p1 .img1 { left: 0; width: 50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index: 1; }
+    .p1 .img2 { left: 50%; width: 50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index: 1; }
+    .p1 .img3 { right: 0; width: 50%; height: 100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index: 2; pointer-events: none;}
+
+    .p1.animate .img1 { transform: translateX(-100%); }
+    .p1.animate .img2 { transform: translateX(-100%); }
+
+    /* SECOND PARENT: image 1 on top, img2 behind img1, img3 on the right */
+    .p2 .img1 {
+      left: 0; width: 50%;
+      background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca');
+      /* image 1 on top */
+      z-index: 3;
+    }
+    .p2 .img2 {
+      left: 0; width: 50%;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+      /* behind image 1 and img3 */
+      z-index: 1;
+    }
+    .p2 .img3 {
+      right: 0; width: 50%; height: 100%;
+      background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc');
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Animate both img2 and img3 to the right together */
+    .p2.animate .img2 {
+      transform: translateX(100%);
+    }
+    .p2.animate .img3 {
+      transform: translateX(100%);
+    }
+  </style>
 
 
 </head>
@@ -305,68 +360,9 @@
         </a>
       </div>
     </div>
-    <!-- Sidebar list -->
-    <div class="flex flex-col gap-6">
-      <div class="card-bg rounded-2xl p-5 flex flex-col">
-        <div class="text-xs uppercase tracking-wider text-[#00F5D4] mb-1">Top Picks</div>
-        <h2 class="text-xl font-bold mb-2">Spotlight Story</h2>
-        <p class="text-sm mb-3">
-          These albums fuse sound and visual art into timeless experiences. Each cover reflects the music — vibrant,
-          moody, bold, or hypnotic.
-        </p>
-        <div class="mt-auto">
-          <a href="#" class="text-sm underline">Explore more</a>
-        </div>
-      </div>
-      <div class="card-bg rounded-2xl p-5 flex flex-col">
-        <div class="text-xs uppercase tracking-wider text-[#FFB200] mb-1">Quick Reads</div>
-        <h3 class="font-semibold mb-2">Latest Stories</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-[#2B86C5]">8 Albums To Listen Now</a></li>
-          <li><a href="#" class="hover:text-[#2B86C5]">Behind the Sound: Creative Process</a></li>
-          <li><a href="#" class="hover:text-[#2B86C5]">Genre Spotlight: Psychedelic Waves</a></li>
-        </ul>
-      </div>
-    </div>
+    
   </section>
 
-  <!-- THE WEEKLY SPIN / ALBUM OF THE WEEK -->
-  <section class="max-w-7xl mx-auto px-6 mt-16">
-    <div class="flex flex-col md:flex-row gap-10">
-      <div class="md:w-1/2 relative rounded-2xl overflow-hidden">
-        <!-- mask-style animation placeholder -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/30 to-[#2B86C5]/30 mix-blend-overlay"></div>
-        <img src="" alt="Album cover aesthetic" class="w-full h-96 object-cover" />
-      </div>
-      <div class="md:w-1/2 flex flex-col justify-between">
-        <div>
-          <div class="text-sm uppercase tracking-wider text-[#00F5D4] mb-1">The Weekly Spin</div>
-          <h2 class="text-3xl font-bold mb-3">Sonic Spotlight: Visual & Sound Collage</h2>
-          <p class="mb-4">
-            Each album featured here is more than just music — it’s a complete sensory experience. From sleek,
-            futuristic grooves to raw emotional ballads, psychedelic swirls to bold cultural statements, these works
-            push boundaries. Their visuals merge with sound to become unforgettable moments.
-          </p>
-          <p class="mb-6 text-gray-300">
-            These albums fuse sound and visual art into timeless experiences. Each cover reflects the music within —
-            vibrant, moody, bold, or hypnotic — yet all share innovation and emotion.
-          </p>
-        </div>
-        <div class="flex gap-4 flex-wrap">
-          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
-            <div class="text-xs uppercase text-[#FF3CAC] mb-1">Album</div>
-            <div class="font-semibold">Random Access Memories</div>
-            <div class="text-sm mt-2">Futuristic groove meets timeless class.</div>
-          </div>
-          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
-            <div class="text-xs uppercase text-[#784BA0] mb-1">Album</div>
-            <div class="font-semibold">Melodrama</div>
-            <div class="text-sm mt-2">Colorful chaos wrapped in melody.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
 
@@ -421,32 +417,148 @@
 
 
 
-  <!-- IMAGE SLIDE FEATURE -->
-<section class="max-w-5xl mx-auto mt-20 px-6">
-  <div class="text-center mb-8">
-    <div class="text-xs uppercase tracking-widest text-[#00F5D4]">Visual Feature</div>
-    <h2 class="text-4xl font-bold neon-gradient">Layered Vibe Slides</h2>
-    <p class="text-gray-300 mt-2">Dynamic overlapping visuals that shift with scroll—showcasing soundscapes in motion.</p>
-  </div>
-
-  <div id="image-grid" class="flex flex-col items-center gap-12">
-    <!-- First slide block -->
-    <div class="parent p1 relative w-full max-w-xl h-[250px] overflow-hidden rounded-2xl bg-[#1B1B1B]">
-      <div class="img img1"></div>
-      <div class="img img2"></div>
-      <div class="img img3"></div>
-      <div class="absolute bottom-3 left-3 px-3 py-1 bg-[#FF3CAC]/90 text-xs font-semibold rounded-full">Original Flow</div>
+<!-- IMAGE SLIDE FEATURE -->
+<section class="max-w-5xl mx-auto mt-12 px-6 mb-10">
+  <div class="text-center mb-4">
+    <div class="text-xs uppercase tracking-widest text-[#00F5D4]">Concert Frames</div>
+    <h2 class="text-4xl font-bold neon-gradient">Melody in Motion</h2>
+    <p class="text-gray-300 mt-2 max-w-2xl mx-auto">
+      Sound isn’t static—these layered visuals move with you as you scroll, giving each beat depth and motion.
+      Think of it like watching the waveform bloom: the top layer pulses, the underlayer hums, and the third rides the
+      rhythm.
+    </p>
+    <div class="text-sm text-gray-400 mt-2 max-w-xl mx-auto">
+      <strong>From Stage to Skyline:</strong> The first layer drops you inside the venue—lights flaring, bass thumping.
+      Beneath it, the second captures the crowd’s roar and the sea of movement.
+      The third layer pulls back to reveal the city that hosted the night, glowing with post-show energy.
+      Together, they tell the full story of a concert—before, during, and after the last note fades.
     </div>
+  </div>
+  <div class="flex justify-center items-center gap-6">
+    <div id="image-grid" class="relative">
+      <!-- First parent, original animation -->
+      <div class="parent p1" id="img-animation-parent-1">
+        <div class="img img1"></div>
+        <div class="img img2"></div>
+        <div class="img img3"></div>
+      </div>
+      <!-- Second parent, new layer logic -->
+      <div class="parent p2" id="img-animation-parent-2">
+        <div class="img img1"></div> <!-- TOP layer: leads -->
+        <div class="img img2"></div> <!-- Texture underneath -->
+        <div class="img img3"></div> <!-- Follows the flow -->
+      </div>
+    </div>
+    <!-- Sidebar list -->
+    <div class="flex flex-col gap-6">
+      <div class="card-bg rounded-2xl p-5 flex flex-col">
+        <div class="text-xs uppercase tracking-wider text-[#00F5D4] mb-1">Top Picks</div>
+        <h2 class="text-xl font-bold mb-2">Spotlight Story</h2>
+        <p class="text-sm mb-3">
+          These albums fuse sound and visual art into timeless experiences. Each cover reflects the music — vibrant,
+          moody, bold, or hypnotic.
+        </p>
+        <div class="mt-auto">
+          <a href="#" class="text-sm underline">Explore more</a>
+        </div>
+      </div>
+      <div class="card-bg rounded-2xl p-5 flex flex-col">
+        <div class="text-xs uppercase tracking-wider text-[#FFB200] mb-1">Quick Reads</div>
+        <h3 class="font-semibold mb-2">Latest Stories</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-[#2B86C5]">8 Albums To Listen Now</a></li>
+          <li><a href="#" class="hover:text-[#2B86C5]">Behind the Sound: Creative Process</a></li>
+          <li><a href="#" class="hover:text-[#2B86C5]">Genre Spotlight: Psychedelic Waves</a></li>
+        </ul>
+      </div>
+      <div class="card-bg rounded-2xl p-5 flex flex-col">
+        <div class="text-xs uppercase tracking-wider text-[#FF3CAC] mb-1">On Stage</div>
+        <h2 class="text-xl font-bold mb-2">Live Snippet</h2>
+        <p class="text-sm mb-3">
+          Quick cut: how the venue’s energy shaped the sound—see the visual ripple.
+        </p>
+        <div class="mt-auto">
+          <a href="#" class="text-sm underline">Dig deeper</a>
+        </div>
+      </div>
 
-    <!-- Second slide block -->
-    <div class="parent p2 relative w-full max-w-xl h-[250px] overflow-hidden rounded-2xl bg-[#1B1B1B]">
-      <div class="img img1"></div>
-      <div class="img img2"></div>
-      <div class="img img3"></div>
-      <div class="absolute bottom-3 left-3 px-3 py-1 bg-[#00F5D4]/90 text-xs font-semibold rounded-full">Rearranged Layers</div>
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+<!-- MEET THE ARTISTS , team menbers -->
+<section class="bg-[#0F0F17] py-16 px-6 " id="artists-section">
+  <div class="max-w-4xl mx-auto text-center mb-10">
+    <div class="text-xs uppercase tracking-wider text-[#00F5D4]">Top Talent</div>
+    <h2 class="text-4xl font-bold neon-gradient">Meet Our Artists</h2>
+    <p class="text-gray-300 mt-2">
+      Scroll through our headliners. Hover a name to bring the vibe to life — faces behind the music, in full color.
+    </p>
+  </div>
+
+  <div class="w-[80%] mx-auto flex flex-col gap-4 relative">
+    <!-- Floating image preview -->
+    <div id="hover-img"
+      class="fixed w-40 h-40 rounded-full overflow-hidden border-4 border-[#FF3CAC] shadow-[0_0_40px_rgba(255,60,172,0.5)] pointer-events-none z-50"
+      style="display: none; opacity: 0; background: #222; position: fixed;">
+      <img src="" alt="artist" class="w-full h-full object-cover" style="display: block;" />
+    </div>
+
+    <!-- Artist List -->
+    <div class="space-y-2">
+      <div class="artist flex items-center justify-between p-4 w-full h-32 bg-[#1B1B2E] rounded-xl cursor-pointer group" data-img="../images/img5.png">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#FF3CAC] rounded-full"></div>
+          <span class="text-xl font-semibold">Luna Waves</span>
+        </div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Synthwave Producer</div>
+      </div>
+
+      <div class="artist flex items-center justify-between p-4 h-32 bg-[#1B1B2E] rounded-xl cursor-pointer group" data-img="../images/img4.png">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#00F5D4] rounded-full"></div>
+          <span class="text-xl font-semibold">Echo Noir</span>
+        </div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Ambient Composer</div>
+      </div>
+
+      <div class="artist flex items-center justify-between p-4 h-32 bg-[#1B1B2E] rounded-xl cursor-pointer group" data-img="../images/img3.png">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#784BA0] rounded-full"></div>
+          <span class="text-xl font-semibold">Velvet Pulse</span>
+        </div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Visual Artist</div>
+      </div>
+
+      <div class="artist flex items-center justify-between p-4 h-32 bg-[#1B1B2E] rounded-xl cursor-pointer group" data-img="../images/img2.png">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#FFB200] rounded-full"></div>
+          <span class="text-xl font-semibold">Neon Drift</span>
+        </div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">DJ / Live Sets</div>
+      </div>
+
+      <div class="artist flex items-center justify-between p-4 h-32 bg-[#1B1B2E] rounded-xl cursor-pointer group" data-img="../images/img1.png">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#2B86C5] rounded-full"></div>
+          <span class="text-xl font-semibold">Aurora Vox</span>
+        </div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Vocalist</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 
 
 
@@ -632,6 +744,92 @@
 
 
 
+
+  <!-- SCRIPT for showing artist ,,, team members -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hoverImg = document.getElementById('hover-img');
+  if (!hoverImg) {
+    console.warn('hover-img element missing');
+    return;
+  }
+  const imgTag = hoverImg.querySelector('img');
+  const artists = document.querySelectorAll('.artist');
+  let currentHovered = null;
+  let rafId = null;
+
+  // Ensure preview container has a visible debug border during dev (remove later)
+  hoverImg.style.border = hoverImg.style.border || '4px solid #FF3CAC';
+
+  function showPreview(imgSrc, event) {
+  imgTag.src = imgSrc;
+  hoverImg.style.left = '700px';
+  hoverImg.style.top = '250px';
+  hoverImg.style.display = 'block';
+  hoverImg.style.opacity = '1';
+}
+
+  function hidePreview() {
+    hoverImg.style.opacity = '0';
+    currentHovered = null;
+    setTimeout(() => {
+      if (hoverImg.style.opacity === '0') {
+        hoverImg.style.display = 'none';
+      }
+    }, 200);
+  }
+
+  function positionPreview(e) {
+    if (!e) return;
+    hoverImg.style.left = (e.pageX + 20) + 'px';
+    hoverImg.style.top = (e.pageY - 60) + 'px';
+  }
+
+  artists.forEach(artist => {
+    artist.addEventListener('mouseenter', e => {
+      currentHovered = artist;
+      showPreview(artist.dataset.img, e);
+    });
+
+    artist.addEventListener('mousemove', e => {
+      if (!currentHovered) return;
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          positionPreview(e);
+          rafId = null;
+        });
+      }
+    });
+
+    artist.addEventListener('mouseleave', () => {
+      hidePreview();
+    });
+  });
+
+  // global safety: hide if not over any artist
+  document.addEventListener('mousemove', () => {
+    const overAny = Array.from(artists).some(a => a.matches(':hover'));
+    if (!overAny && currentHovered) hidePreview();
+  });
+
+  imgTag.addEventListener('error', () => {
+    console.warn('Artist image failed to load:', imgTag.src);
+    hidePreview();
+  });
+
+  imgTag.addEventListener('load', () => {
+    // optional: remove debug border after successful load
+    // hoverImg.style.border = 'none';
+  });
+});
+</script>
+
+
+
+
+
+
+
   <!-- Script of loading page -->
   <!-- behavior script -->
   <script>
@@ -737,49 +935,37 @@
   </script>
 
 
-<!-- here is image grid -->
+<!-- here is animation for img grid -->
 <script>
-  function setupScrollSlide(parentId, type) {
-    const parent = document.getElementById(parentId);
-    const img1 = parent.querySelector('.img1');
-    const img2 = parent.querySelector('.img2');
-    const img3 = parent.querySelector('.img3');
-
-    function update() {
-      const rect = parent.getBoundingClientRect();
-      const vh = window.innerHeight;
-
-      // only animate when in view
-      if (rect.bottom < 0 || rect.top > vh) return;
-
-      // progress: 0 when top just enters bottom of viewport, 1 when completely passed
-      let progress = (vh - rect.top) / (vh + rect.height);
-      progress = Math.min(1, Math.max(0, progress));
-
-      const translate = progress * 100; // percent
-
-      if (type === 'p1') {
-        img1.style.transform = `translateX(-${translate}%)`;
-        img2.style.transform = `translateX(-${translate}%)`;
-      } else if (type === 'p2') {
-        img2.style.transform = `translateX(${translate}%)`;
-        img3.style.transform = `translateX(${translate}%)`;
-      }
+    // Animation observer for both parents
+    function setupObserver(parentId, className, reverseMs = 3000) {
+      const parent = document.getElementById(parentId);
+      let animated = false;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            parent.classList.add('animate');
+            setTimeout(() => {
+              parent.classList.remove('animate');
+              animated = false;
+            }, reverseMs);
+          }
+        });
+      }, { threshold: 1.0 });
+      observer.observe(parent);
     }
 
-    window.addEventListener('scroll', update);
-    window.addEventListener('resize', update);
-    update();
-  }
-
-  setupScrollSlide('img-animation-parent-1', 'p1');
-  setupScrollSlide('img-animation-parent-2', 'p2');
-</script>
+    setupObserver('img-animation-parent-1', 'p1');
+    setupObserver('img-animation-parent-2', 'p2');
+  </script>
 
 
 </body>
 
 </html>
+
+
 
 
 

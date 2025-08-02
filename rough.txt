@@ -1,0 +1,343 @@
+<!-- here is image grid -->
+<script>
+  function setupScrollSlide(parentId, type) {
+    const parent = document.getElementById(parentId);
+    const img1 = parent.querySelector('.img1');
+    const img2 = parent.querySelector('.img2');
+    const img3 = parent.querySelector('.img3');
+
+    function update() {
+      const rect = parent.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // only animate when in view
+      if (rect.bottom < 0 || rect.top > vh) return;
+
+      // progress: 0 when top just enters bottom of viewport, 1 when completely passed
+      let progress = (vh - rect.top) / (vh + rect.height);
+      progress = Math.min(1, Math.max(0, progress));
+
+      const translate = progress * 100; // percent
+
+      if (type === 'p1') {
+        img1.style.transform = `translateX(-${translate}%)`;
+        img2.style.transform = `translateX(-${translate}%)`;
+      } else if (type === 'p2') {
+        img2.style.transform = `translateX(${translate}%)`;
+        img3.style.transform = `translateX(${translate}%)`;
+      }
+    }
+
+    window.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  setupScrollSlide('img-animation-parent-1', 'p1');
+  setupScrollSlide('img-animation-parent-2', 'p2');
+</script>
+
+
+<!-- image slider -->
+ <style>
+  .parent { position: relative; overflow: hidden; }
+  .img {
+    position: absolute; top: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1s cubic-bezier(0.77,0,0.175,1);
+  }
+  .p1 .img1 { left: 0; width: 50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index:1; }
+  .p1 .img2 { left: 50%; width: 50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index:1; }
+  .p1 .img3 { right: 0; width: 50%; height:100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index:2; pointer-events:none; }
+  .p1.animate .img1 { transform: translateX(-100%); }
+  .p1.animate .img2 { transform: translateX(-100%); }
+
+  .p2 .img1 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index:3; }
+  .p2 .img2 { left:0; width:50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index:1; }
+  .p2 .img3 { right:0; width:50%; height:100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index:2; pointer-events:none; }
+  .p2.animate .img2 { transform: translateX(100%); }
+  .p2.animate .img3 { transform: translateX(100%); }
+
+  /* subtle glow border to fit theme */
+  .parent { box-shadow: 0 10px 40px -10px rgba(255,60,172,0.3); border-radius: 1rem; }
+</style>
+
+<div id="image-grid">
+    <!-- First parent, your original animation -->
+    <div class="parent p1" id="img-animation-parent-1">
+      <div class="img img1"></div>
+      <div class="img img2"></div>
+      <div class="img img3"></div>
+    </div>
+    <!-- Second parent, as per your new requirements -->
+    <div class="parent p2" id="img-animation-parent-2">
+      <div class="img img1"></div> <!-- This is on TOP -->
+      <div class="img img2"></div> <!-- This moves right underneath -->
+      <div class="img img3"></div> <!-- This moves right together with img2 -->
+    </div>
+  </div>
+
+
+
+
+  ///////can add it <div id="image-grid" class="relative flex flex-col gap-8">
+    <!-- FIRST PARENT: venue / crowd / city build-up -->
+    <div class="parent p1 overflow-hidden rounded-2xl" id="img-animation-parent-1">
+      <div class="img img1 layer" style="--border: #FF3CAC;" aria-label="Concert stage view"></div>
+      <div class="img img2 layer" style="--border: #00F5D4;" aria-label="Audience crowd"></div>
+      <div class="img img3 layer" style="--border: #784BA0;" aria-label="City skyline after show"></div>
+    </div>
+
+    <!-- SECOND PARENT: alternate stacking vibe -->
+    <div class="parent p2 overflow-hidden rounded-2xl" id="img-animation-parent-2">
+      <div class="img img1 layer" style="--border: #FFD700;" aria-label="Front-row energy"></div>
+      <div class="img img2 layer" style="--border: #00FFA3;" aria-label="Backstage vibe"></div>
+      <div class="img img3 layer" style="--border: #5D9CEC;" aria-label="City lights reflection"></div>
+    </div>
+  </div>//// with style -- <style>
+  :root {
+    --transition-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .neon-gradient {
+    background: linear-gradient(90deg, #ff3cac, #00f5d4, #784ba0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Container adjustments */
+  #image-grid { margin-top: 0; }
+  .parent {
+    position: relative;
+    width: 100%;
+    min-height: 360px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* Layer boxes */
+  .layer {
+    flex: 1 1 calc(33.333% - 8px);
+    position: relative;
+    min-height: 260px;
+    border: 3px solid var(--border);
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -10px rgba(0,0,0,0.5);
+    transition: transform .6s var(--transition-ease), filter .4s ease;
+  }
+
+  /* Make top layer slightly above others for stacking */
+  .p1 .img3 { z-index: 3; }
+  .p1 .img2 { z-index: 2; }
+  .p1 .img1 { z-index: 1; }
+
+  .p2 .img1 { z-index: 3; }
+  .p2 .img2 { z-index: 1; }
+  .p2 .img3 { z-index: 2; }
+
+  /* Hover / scroll subtle lift */
+  .layer:hover {
+    transform: translateY(-6px) scale(1.02);
+    filter: brightness(1.05);
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 1024px) {
+    .layer { flex: 1 1 100%; min-height: 240px; }
+    .parent { flex-direction: column; }
+  }
+
+  /* Placeholder background images (replace with real concert venue/city images) */
+  .p1 .img1 { background-image: url('https://images.unsplash.com/photo-1508973375465-2c31216d3f5f?auto=format&fit=crop&w=800&q=80'); } /* stage lights */
+  .p1 .img2 { background-image: url('https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=800&q=80'); } /* crowd */
+  .p1 .img3 { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80'); } /* city skyline */
+
+  .p2 .img1 { background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80'); } /* front-row */
+  .p2 .img2 { background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=800&q=80'); } /* backstage */
+  .p2 .img3 { background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80'); } /* city lights */
+</style>
+
+<script>
+  // optional: subtle scroll-driven class toggle to add dynamic shifts
+  const observers = document.querySelectorAll('.parent');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('animate');
+      } else {
+        e.target.classList.remove('animate');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observers.forEach(o => io.observe(o));
+</script>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, initial-scale=1.0">
+  <title>Double Image Slide Demo</title>
+  <style>
+    #image-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .p1{
+        margin-top: 100vh;
+    }
+    .parent {
+      position: relative;
+      width: 600px;
+      height: 300px;
+      overflow: hidden;
+      /* margin-top: 100vh; */
+       /* For demo scroll */
+      background: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    /* Shared styles */
+    .img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    /* FIRST PARENT: the original animation */
+    .p1 .img1 { left: 0; width: 50%; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); z-index: 1; }
+    .p1 .img2 { left: 50%; width: 50%; background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca'); z-index: 1; }
+    .p1 .img3 { right: 0; width: 50%; height: 100%; background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc'); z-index: 2; pointer-events: none;}
+
+    .p1.animate .img1 { transform: translateX(-100%); }
+    .p1.animate .img2 { transform: translateX(-100%); }
+
+    /* SECOND PARENT: image 1 on top, img2 behind img1, img3 on the right */
+    .p2 .img1 {
+      left: 0; width: 50%;
+      background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca');
+      /* image 1 on top */
+      z-index: 3;
+    }
+    .p2 .img2 {
+      left: 0; width: 50%;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+      /* behind image 1 and img3 */
+      z-index: 1;
+    }
+    .p2 .img3 {
+      right: 0; width: 50%; height: 100%;
+      background-image: url('https://imgs.search.brave.com/oO_-tTqxmTp-608UIFCcRDqk_5sNQE-w2beIN4fLff0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTAv/MzkxLzI3NC9zbWFs/bC9zdW5yaXNlLW9y/LXN1bnNldC1ibHVl/LWFuZC1wZWFjaC1z/a3ktbW9ybmluZy1j/b2xvcmZ1bC1sb25n/LXNob3QtZXZlbmlu/Zy1zZXJlbmUtc3Vu/c2V0LWNhbG0tbGFu/ZHNjYXBlLW5hdHVy/ZS1zdW5yaXNlLXBl/YWNlZnVsLXZpYnJh/bnQtYmx1ZS1za3kt/YnJlYXRodGFraW5n/LWJlYXV0aWZ1bC10/cmFucXVpbC1waG90/by5qcGc');
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Animate both img2 and img3 to the right together */
+    .p2.animate .img2 {
+      transform: translateX(100%);
+    }
+    .p2.animate .img3 {
+      transform: translateX(100%);
+    }
+  </style>
+</head>
+<body>
+  <div id="image-grid">
+    <!-- First parent, your original animation -->
+    <div class="parent p1" id="img-animation-parent-1">
+      <div class="img img1"></div>
+      <div class="img img2"></div>
+      <div class="img img3"></div>
+    </div>
+    <!-- Second parent, as per your new requirements -->
+    <div class="parent p2" id="img-animation-parent-2">
+      <div class="img img1"></div> <!-- This is on TOP -->
+      <div class="img img2"></div> <!-- This moves right underneath -->
+      <div class="img img3"></div> <!-- This moves right together with img2 -->
+    </div>
+  </div>
+
+  <script>
+    // Animation observer for both parents
+    function setupObserver(parentId, className, reverseMs = 3000) {
+      const parent = document.getElementById(parentId);
+      let animated = false;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            parent.classList.add('animate');
+            setTimeout(() => {
+              parent.classList.remove('animate');
+              animated = false;
+            }, reverseMs);
+          }
+        });
+      }, { threshold: 1.0 });
+      observer.observe(parent);
+    }
+
+    setupObserver('img-animation-parent-1', 'p1');
+    setupObserver('img-animation-parent-2', 'p2');
+  </script>
+</body>
+</html>
+
+
+ <!-- THE WEEKLY SPIN / ALBUM OF THE WEEK -->
+  <section class="max-w-7xl mx-auto px-6 mt-16">
+    <div class="flex flex-col md:flex-row gap-10">
+      <div class="md:w-1/2 relative rounded-2xl overflow-hidden">
+        <!-- mask-style animation placeholder -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/30 to-[#2B86C5]/30 mix-blend-overlay"></div>
+        <img src="" alt="Album cover aesthetic" class="w-full h-96 object-cover" />
+      </div>
+      <div class="md:w-1/2 flex flex-col justify-between">
+        <div>
+          <div class="text-sm uppercase tracking-wider text-[#00F5D4] mb-1">The Weekly Spin</div>
+          <h2 class="text-3xl font-bold mb-3">Sonic Spotlight: Visual & Sound Collage</h2>
+          <p class="mb-4">
+            Each album featured here is more than just music — it’s a complete sensory experience. From sleek,
+            futuristic grooves to raw emotional ballads, psychedelic swirls to bold cultural statements, these works
+            push boundaries. Their visuals merge with sound to become unforgettable moments.
+          </p>
+          <p class="mb-6 text-gray-300">
+            These albums fuse sound and visual art into timeless experiences. Each cover reflects the music within —
+            vibrant, moody, bold, or hypnotic — yet all share innovation and emotion.
+          </p>
+        </div>
+        <div class="flex gap-4 flex-wrap">
+          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
+            <div class="text-xs uppercase text-[#FF3CAC] mb-1">Album</div>
+            <div class="font-semibold">Random Access Memories</div>
+            <div class="text-sm mt-2">Futuristic groove meets timeless class.</div>
+          </div>
+          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
+            <div class="text-xs uppercase text-[#784BA0] mb-1">Album</div>
+            <div class="font-semibold">Melodrama</div>
+            <div class="text-sm mt-2">Colorful chaos wrapped in melody.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
