@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AmpedUp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOM5Qb5G1zY+0ZsQ2e6g+vVbG6cFQpyN0yJf4yI5KX1Z6+2mF4b+V0Y5qQ6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* custom gradients & glow */
+    .neon-gradient {
+      background: linear-gradient(135deg, #FF3CAC, #784BA0, #2B86C5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glow {
+      text-shadow: 0 0 12px rgba(255,60,172,0.6), 0 0 24px rgba(120,75,160,0.4);
+    }
+    .card-bg {
+      background: #1B1B1B;
+    }
+  </style>
+</head>
+<body class="bg-[#0D0D0D] text-white font-sans leading-snug">
+
+  <!-- LOADING OVERLAY (place immediately inside <body> before main content) -->
+<div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0D0D0D]">
+  <div class="text-center space-y-4">
+    <div class="flex items-center justify-center gap-2">
+      <div class="text-6xl font-extrabold neon-gradient">AmpedUp</div>
+      <div class="text-sm uppercase tracking-wider text-gray-400 self-end">Loading Vibes</div>
+    </div>
+    <div class="flex items-baseline justify-center gap-4">
+      <div class="text-5xl font-bold text-white" id="beat-counter">0</div>
+      <div class="text-lg text-gray-400">/100 Beats</div>
+    </div>
+    <div class="relative overflow-hidden h-10">
+      <div class="flex space-x-2 justify-center">
+        <div class="px-4 py-2 bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] rounded-full animate-pulse text-xs font-semibold">Spotlight</div>
+        <div class="px-4 py-2 bg-gradient-to-r from-[#00F5D4] to-[#2B86C5] rounded-full animate-pulse text-xs font-semibold">Weekly Spin</div>
+        <div class="px-4 py-2 bg-gradient-to-r from-[#FFB200] to-[#FF3CAC] rounded-full animate-pulse text-xs font-semibold">Vibes</div>
+      </div>
+    </div>
+    <div class="text-sm text-gray-300 max-w-md mx-auto">
+      Spinning the soundscape. Sit tight — the next beat drops in.
+    </div>
+  </div>
+</div>
+
+
+  <!-- HEADER + Toggle Menu -->
+<header class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between border-b divider relative">
+  <div class="flex items-center gap-3">
+    <div class="text-3xl font-extrabold neon-gradient">AmpedUp</div>
+    <div class="text-xs uppercase tracking-wider text-gray-200 mt-1">Music Magazine</div>
+  </div>
+
+  <div>
+    <button id="menu-toggle"
+      class="relative flex items-center gap-2 border-2 border-white bg-[#1B1B1B] text-white rounded-lg px-4 py-2 hover:brightness-105 overflow-hidden">
+      <span id="menu-label" class="font-bold text-sm transition">MENU</span>
+      <div class="w-5 flex flex-col gap-[3px] h-7 justify-center">
+        <div class="h-0.5 bg-white rounded"></div>
+        <div class="h-0.5 bg-white rounded"></div>
+      </div>
+      <!-- blink overlay -->
+      <span id="blink" class="absolute inset-0 bg-white opacity-0 pointer-events-none"></span>
+    </button>
+  </div>
+
+  <!-- NAV PANEL -->
+  <div id="nav-panel"
+    class="navbar z-30 flex flex-col justify-start absolute right-0 top-0 w-[75%] max-w-sm rounded-md p-5 hidden nav-panel shadow-xl bg-[#1B1B1B] font-sans">
+    <div class="flex justify-end">
+      <div id="close-btn"
+        class="close cursor-pointer w-[100px] flex justify-center items-center gap-2 relative border-2 border-white bg-[#1B1B1B] text-white rounded-lg text-center py-2 px-3 hover:brightness-105">
+        <p class="font-bold text-xs m-0">CLOSE</p>
+        <div class="relative w-5 h-5 flex items-center justify-center">
+          <span class="block absolute w-4 h-[2px] bg-white rotate-45"></span>
+          <span class="block absolute w-4 h-[2px] bg-white -rotate-45"></span>
+        </div>
+      </div>
+    </div>
+    <p class="text-sm mt-4 mb-6">
+      AmpedUp is the pulse of modern music culture—visual stories, featured soundscapes, and curated vibes. Dive in, feel the rhythm, and stay amped.
+    </p>
+    <div class="flex flex-col gap-2">
+      <div class="stack-item w-full h-[80px] text-3xl border-t-2 border-b-2 border-white flex items-center justify-center relative overflow-hidden bg-[#1B1B1B] hover:bg-[#FF3CAC]">
+        SPOTLIGHT
+      </div>
+      <div class="stack-item w-full h-[80px] text-3xl border-t-2 border-b-2 border-white flex items-center justify-center relative -mt-[37px] overflow-hidden bg-[#1B1B1B] hover:bg-[#277b70]">
+        WEEKLY SPIN
+      </div>
+      <div class="stack-item w-full h-[80px] text-3xl border-t-2 border-b-2 border-white flex items-center justify-center relative -mt-[37px] overflow-hidden bg-[#1B1B1B] hover:bg-[#784BA0]">
+        FEATURES
+      </div>
+      <div class="stack-item w-full h-[80px] text-3xl border-t-2 border-b-2 border-white flex items-center justify-center relative -mt-[37px] overflow-hidden bg-[#1B1B1B] hover:bg-[#FFB200]">
+        VIBES
+      </div>
+      <div class="stack-item w-full h-[80px] text-3xl border-t-2 border-b-2 border-white flex items-center justify-center relative -mt-[37px] overflow-hidden bg-[#1B1B1B] hover:bg-[#353993]">
+        CONTACT
+      </div>
+    </div>
+  </div>
+  <style>
+    /* blink animation */
+    @keyframes flash {
+      0% { opacity: .6; }
+      100% { opacity: 0; }
+    }
+    .blink-active {
+      animation: flash .4s ease-out;
+    }
+  </style>
+</header>
+
+  <!-- FEATURE / SPOTLIGHT with partitions -->
+  <section class="max-w-6xl mx-auto px-6 mt-10">
+    <!-- Title bar with underline partition -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-gray-600 pb-4 mb-6">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-[#00F5D4]">The Weekly Spin</div>
+        <h1 class="text-4xl font-bold leading-tight">Sonic Spotlight</h1>
+      </div>
+      <div class="mt-4 sm:mt-0 text-sm text-gray-300 max-w-md">
+        Each week we elevate one sonic canvas—an album whose sound and visuals fuse into a living experience. Dive into its world, feel the tone, and ride the vibe.
+      </div>
+    </div>
+
+    <!-- Content split -->
+    <div class="grid gap-8 md:grid-cols-2">
+      <!-- Album visual block -->
+      <div class="relative rounded-xl overflow-hidden border border-gray-700">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/25 via-[#784BA0]/25 to-[#2B86C5]/25 mix-blend-overlay pointer-events-none"></div>
+        <img src="" alt="Album cover" class="w-full h-96 object-cover" />
+      </div>
+      <!-- Description / metadata -->
+      <div class="flex flex-col justify-between">
+        <div>
+          <div class="text-sm uppercase tracking-wider text-[#FFB200] mb-1">Featured Album</div>
+          <h2 class="text-3xl font-bold mb-3">Random Access Memories</h2>
+          <p class="mb-4">
+            Each album here is a crafted fusion of sound and visual identity. From futuristic grooves to emotive textures, the cover art and music create a layered experience that stays with you. This week’s pick is a celebration of timeless rhythm and modern sheen.
+          </p>
+          <p class="text-sm text-gray-300 mb-6">
+            Futuristic groove meets timeless class. Feel the pulse, see the story.
+          </p>
+        </div>
+        <div class="flex gap-3 flex-wrap">
+          <button class="px-5 py-3 bg-[#FF3CAC] rounded-full font-semibold hover:brightness-105 transition">Read Story</button>
+          <button class="px-5 py-3 border border-[#00F5D4] rounded-full font-semibold hover:bg-[#00F5D4]/10 transition">Listen Preview</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- thin horizontal partition for separation -->
+    <div class="my-12 border-t border-gray-600"></div>
+  </section>
+
+  <!-- minimal supporting styles -->
+  <style>
+    .neon-gradient {
+      background: linear-gradient(135deg, #FF3CAC, #784BA0, #2B86C5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</div>
+
+  <!-- HERO / FEATURED ARTICLE -->
+  <section class="max-w-7xl mx-auto px-6 mt-6 grid gap-6 md:grid-cols-3">
+    <!-- Big feature -->
+    <div class="md:col-span-2 relative overflow-hidden rounded-2xl">
+      <div class="absolute inset-0 bg-gradient-to-br from-[#784BA0]/40 via-[#2B86C5]/30 to-[#FF3CAC]/30 mix-blend-overlay"></div>
+      <img src="" alt="Featured visual" class="w-full h-80 object-cover rounded-2xl" />
+      <div class="relative p-6 flex flex-col justify-end h-80">
+        <div class="text-sm uppercase tracking-widest text-[#FFB200] mb-2">Feature Focus</div>
+        <h1 class="text-4xl font-extrabold mb-2">The Weekly Spin</h1>
+        <p class="max-w-prose mb-4">
+          Each week we spotlight a sound that’s shaping vibe culture. From sleek sonic experiments to bold visual storytelling, this is where rhythm meets design.
+        </p>
+        <a href="#" class="inline-block px-5 py-3 bg-[#FF3CAC] rounded-full font-semibold hover:brightness-110 transition">
+          Read Full Story
+        </a>
+      </div>
+    </div>
+    <!-- Sidebar list -->
+    <div class="flex flex-col gap-6">
+      <div class="card-bg rounded-2xl p-5 flex flex-col">
+        <div class="text-xs uppercase tracking-wider text-[#00F5D4] mb-1">Top Picks</div>
+        <h2 class="text-xl font-bold mb-2">Spotlight Story</h2>
+        <p class="text-sm mb-3">
+          These albums fuse sound and visual art into timeless experiences. Each cover reflects the music — vibrant, moody, bold, or hypnotic.
+        </p>
+        <div class="mt-auto">
+          <a href="#" class="text-sm underline">Explore more</a>
+        </div>
+      </div>
+      <div class="card-bg rounded-2xl p-5 flex flex-col">
+        <div class="text-xs uppercase tracking-wider text-[#FFB200] mb-1">Quick Reads</div>
+        <h3 class="font-semibold mb-2">Latest Stories</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-[#2B86C5]">8 Albums To Listen Now</a></li>
+          <li><a href="#" class="hover:text-[#2B86C5]">Behind the Sound: Creative Process</a></li>
+          <li><a href="#" class="hover:text-[#2B86C5]">Genre Spotlight: Psychedelic Waves</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE WEEKLY SPIN / ALBUM OF THE WEEK -->
+  <section class="max-w-7xl mx-auto px-6 mt-16">
+    <div class="flex flex-col md:flex-row gap-10">
+      <div class="md:w-1/2 relative rounded-2xl overflow-hidden">
+        <!-- mask-style animation placeholder -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/30 to-[#2B86C5]/30 mix-blend-overlay"></div>
+        <img src="" alt="Album cover aesthetic" class="w-full h-96 object-cover" />
+      </div>
+      <div class="md:w-1/2 flex flex-col justify-between">
+        <div>
+          <div class="text-sm uppercase tracking-wider text-[#00F5D4] mb-1">The Weekly Spin</div>
+          <h2 class="text-3xl font-bold mb-3">Sonic Spotlight: Visual & Sound Collage</h2>
+          <p class="mb-4">
+            Each album featured here is more than just music — it’s a complete sensory experience. From sleek, futuristic grooves to raw emotional ballads, psychedelic swirls to bold cultural statements, these works push boundaries. Their visuals merge with sound to become unforgettable moments.
+          </p>
+          <p class="mb-6 text-gray-300">
+            These albums fuse sound and visual art into timeless experiences. Each cover reflects the music within — vibrant, moody, bold, or hypnotic — yet all share innovation and emotion.
+          </p>
+        </div>
+        <div class="flex gap-4 flex-wrap">
+          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
+            <div class="text-xs uppercase text-[#FF3CAC] mb-1">Album</div>
+            <div class="font-semibold">Random Access Memories</div>
+            <div class="text-sm mt-2">Futuristic groove meets timeless class.</div>
+          </div>
+          <div class="bg-[#1B1B1B] rounded-xl p-4 flex-1 min-w-[140px]">
+            <div class="text-xs uppercase text-[#784BA0] mb-1">Album</div>
+            <div class="font-semibold">Melodrama</div>
+            <div class="text-sm mt-2">Colorful chaos wrapped in melody.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- FEATURE GRID / MORE -->
+  <section class="max-w-7xl mx-auto px-6 mt-20">
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card-bg rounded-2xl overflow-hidden flex flex-col">
+        <img src="" alt="Feature 1" class="w-full h-48 object-cover" />
+        <div class="p-5 flex flex-col flex-1">
+          <div class="text-xs uppercase tracking-wider text-[#FFB200] mb-1">Feature</div>
+          <h3 class="text-xl font-bold mb-2">Behind the Scenes</h3>
+          <p class="text-sm flex-1">
+            Step inside the creative process — late-night sessions, gear, and breakthroughs shaping every note.
+          </p>
+          <div class="mt-4">
+            <a href="#" class="text-sm underline">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-bg rounded-2xl overflow-hidden flex flex-col">
+        <img src="" alt="Feature 2" class="w-full h-48 object-cover" />
+        <div class="p-5 flex flex-col flex-1">
+          <div class="text-xs uppercase tracking-wider text-[#00F5D4] mb-1">Feature</div>
+          <h3 class="text-xl font-bold mb-2">Milestones</h3>
+          <p class="text-sm flex-1">
+            Millions of streams, cross-continental collabs, and the evolution of sound — the journey continues.
+          </p>
+          <div class="mt-4">
+            <a href="#" class="text-sm underline">See details</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-bg rounded-2xl overflow-hidden flex flex-col">
+        <img src="" alt="Feature 3" class="w-full h-48 object-cover" />
+        <div class="p-5 flex flex-col flex-1">
+          <div class="text-xs uppercase tracking-wider text-[#2B86C5] mb-1">Feature</div>
+          <h3 class="text-xl font-bold mb-2">Quick Reads</h3>
+          <p class="text-sm flex-1">
+            Trends, reviews, and soundbite stories that keep you amped and in-the-know.  
+          </p>
+          <div class="mt-4">
+            <a href="#" class="text-sm underline">Explore</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 mt-16">
+  <div class="mb-6 text-center">
+    <div class="text-xs uppercase tracking-wider text-[#00F5D4]">Stay Connected</div>
+    <h2 class="text-3xl font-bold">Tell Us What’s Resonating</h2>
+    <p class="text-sm text-gray-300 max-w-lg mx-auto">
+      Got a vibe, idea, or story you want featured? Drop it here — help shape the next wave on AmpedUp.
+    </p>
+  </div>
+
+  <form action="/index/submit-feedback" method="POST" class="w-full mx-auto flex flex-col gap-4">
+    <div class="relative">
+      <textarea name="feedback"
+        class="w-full min-h-[160px] p-5 rounded-2xl bg-[#1F1B2E] placeholder:text-gray-500 text-white resize-none border border-[#4f4f4f] focus:outline-none focus:ring-2 focus:ring-[#FF3CAC]"
+        placeholder="Share what music moves you, what stories we should cover, or features you want next..." required></textarea>
+      <div
+        class="absolute -top-5 left-4 bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] text-white text-sm font-semibold px-3 py-2 rounded-full border border-[#2B86C5]">
+        Feedback
+      </div>
+    </div>
+    <button type="submit"
+      class="self-start flex items-center gap-1 bg-gradient-to-r from-[#FF3CAC] to-[#2B86C5] text-white px-6 py-2 rounded-full font-semibold hover:brightness-110 transition">
+      Send Vibe
+    </button>
+  </form>
+</section>
+
+
+
+
+
+
+ <!-- FOOTER -->
+<footer class="bg-[#191929] text-white pt-16 pb-8 mt-9">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-10">
+    <!-- Brand + tagline -->
+    <div class="lg:col-span-1 flex flex-col gap-4 border-r border-gray-700 pr-6">
+      <div class="text-2xl font-extrabold neon-gradient">AmpedUp</div>
+      <p class="text-sm">
+        The signal hub for music culture—where visuals meet sound, stories pulse, and every week gets a new spin. Stay tuned. Stay amped.
+      </p>
+      <div class="flex gap-3 mt-2">
+        <a href="#" class="text-lg group relative">
+          <i class="fab fa-instagram"></i>
+          <span class="absolute -top-2 -right-2 bg-[#FF3CAC] rounded-full w-2 h-2 animate-ping"></span>
+        </a>
+        <a href="#" class="text-lg hover:text-[#FFB200]"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="text-lg hover:text-[#00F5D4]"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-lg hover:text-[#1DB954]"><i class="fab fa-spotify"></i></a>
+      </div>
+      <div class="mt-4">
+        <div class="text-xs uppercase tracking-wider mb-1">Quick Pulse</div>
+        <div class="flex flex-col gap-2 text-sm">
+          <a href="#" class="hover:text-[#FF3CAC] flex items-center gap-2"><i class="fas fa-fire text-[#FFB200]"></i>Hot Drop</a>
+          <a href="#" class="hover:text-[#00F5D4] flex items-center gap-2"><i class="fas fa-compact-disc text-[#00F5D4]"></i>Weekly Spin</a>
+          <a href="#" class="hover:text-[#784BA0] flex items-center gap-2"><i class="fas fa-lightbulb text-[#784BA0]"></i>Inspiration</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explore / navigation -->
+    <div class="col-span-1 flex flex-col gap-6 border-r border-gray-700 px-6">
+      <div class="font-semibold uppercase text-xs tracking-wider mb-2">Explore</div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="space-y-1">
+          <div class="font-semibold text-[10px] uppercase tracking-wider">Features</div>
+          <a href="#" class="block hover:text-[#FF3CAC]">Spotlight</a>
+          <a href="#" class="block hover:text-[#00F5D4]">Weekly Spin</a>
+          <a href="#" class="block hover:text-[#784BA0]">Quick Reads</a>
+        </div>
+        <div class="space-y-1">
+          <div class="font-semibold text-[10px] uppercase tracking-wider">More</div>
+          <a href="#" class="block hover:underline">Submit Story</a>
+          <a href="#" class="block hover:underline">Collaborate</a>
+          <a href="#" class="block hover:underline">Advertise</a>
+          <a href="#" class="block hover:underline">About</a>
+        </div>
+      </div>
+      <div class="mt-auto">
+        <div class="text-xs uppercase tracking-wider mb-1">Tags</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-[#1B1B1B] rounded-full text-[10px]">#SynthWave</span>
+          <span class="px-3 py-1 bg-[#1B1B1B] rounded-full text-[10px]">#LoFi</span>
+          <span class="px-3 py-1 bg-[#1B1B1B] rounded-full text-[10px]">#FutureBass</span>
+          <span class="px-3 py-1 bg-[#1B1B1B] rounded-full text-[10px]">#VisualSound</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter + featured mini -->
+    <div class="col-span-2 flex flex-col gap-6 px-6">
+      <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+        <div class="flex-1">
+          <div class="font-semibold uppercase text-xs tracking-wider mb-2">Newsletter</div>
+          <p class="text-sm mb-3">
+            Get the Weekly Spin, exclusive drops, and behind-the-scenes vibes straight to your inbox. No spam, just sound.
+          </p>
+          <form class="flex gap-2 flex-wrap">
+            <input type="email" placeholder="you@music.com"
+              class="flex-1 min-w-[160px] px-4 py-2 rounded-full bg-[#1B1B1B] border border-[#4f4f4f] text-sm focus:outline-none" />
+            <button class="px-5 py-2 rounded-full bg-gradient-to-r from-[#FF3CAC] to-[#2B86C5] text-sm font-semibold hover:scale-[1.02] transition">
+              Subscribe
+            </button>
+          </form>
+        </div>
+        <div class="flex-1 border-l border-gray-600 pl-6">
+          <div class="font-semibold uppercase text-xs tracking-wider mb-2">Featured Vibe</div>
+          <div class="flex flex-col gap-2">
+            <div class="text-sm">This week’s spotlight: <span class="font-bold">“Random Access Memories”</span></div>
+            <div class="text-xs italic text-gray-300">
+              Futuristic groove meets timeless class. Feel the pulse, see the story.
+            </div>
+            <div class="mt-2">
+              <button class="px-4 py-2 mr-2 rounded-full bg-[#FF3CAC] text-xs font-semibold hover:brightness-110">Read</button>
+              <button class="px-4 py-2 rounded-full border border-[#00F5D4] text-xs font-semibold hover:bg-[#00F5D4]/10">Listen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-6 flex-wrap text-xs mt-4">
+        <div class="flex items-start gap-3">
+          <i class="fas fa-bolt text-[#FF3CAC] mt-1"></i>
+          <div>
+            <div class="font-semibold">Amped Updates</div>
+            <div>Early access to drops and exclusive features.</div>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="fas fa-users text-[#00F5D4] mt-1"></i>
+          <div>
+            <div class="font-semibold">Community</div>
+            <div>Contribute vibes, vote on spotlights, connect.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Involvement + legal -->
+    <div class="col-span-1 flex flex-col gap-6 border-l border-gray-700 pl-6">
+      <div class="font-semibold uppercase text-xs tracking-wider mb-2">Get Involved</div>
+      <div class="flex flex-col gap-3 text-sm">
+        <div class="flex items-center gap-2"><i class="fas fa-microphone text-[#FF3CAC]"></i>Pitch a story</div>
+        <div class="flex items-center gap-2"><i class="fas fa-handshake text-[#00F5D4]"></i>Collaborate</div>
+        <div class="flex items-center gap-2"><i class="fas fa-bullhorn text-[#784BA0]"></i>Advertise</div>
+        <div class="flex items-center gap-2"><i class="fas fa-comment-dots text-[#FFB200]"></i>Feedback & bugs</div>
+      </div>
+      <div class="mt-auto text-[11px] text-gray-400">
+        <div class="border-t border-gray-700 pt-4">
+          <div class="flex flex-col sm:flex-row justify-between gap-2">
+            <div>© 2025 AmpedUp. Amplifying culture, one vibe at a time.</div>
+            <div class="flex gap-3">
+              <a href="#" class="hover:underline">Privacy</a>
+              <span class="opacity-60">|</span>
+              <a href="#" class="hover:underline">Terms</a>
+              <span class="opacity-60">|</span>
+              <a href="#" class="hover:underline">Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<!-- Add this script at bottom of body (before closing tag) -->
+<script>
+  // simple beat counter + auto fade
+  const counterEl = document.getElementById("beat-counter");
+  let count = 0;
+  const target = 100;
+  const duration = 2000; // 2 seconds
+  const stepTime = 20;
+  const step = target / (duration / stepTime);
+  const loader = document.getElementById("loader");
+
+  const interval = setInterval(() => {
+    count += step;
+    if (count >= target) {
+      counterEl.innerText = target;
+      clearInterval(interval);
+      // fade out
+      loader.style.transition = "opacity .6s ease";
+      loader.style.opacity = "0";
+      setTimeout(() => loader.remove(), 600);
+    } else {
+      counterEl.innerText = Math.floor(count);
+    }
+  }, stepTime);
+</script>
+
+
+
+  <script>
+  const toggle = document.getElementById('menu-toggle');
+  const panel = document.getElementById('nav-panel');
+  const label = document.getElementById('menu-label');
+  const closeBtn = document.getElementById('close-btn');
+  const blinkEl = document.getElementById('blink');
+
+  function blinkThen(cb) {
+    blinkEl.classList.add('blink-active');
+    blinkEl.style.opacity = '0.6';
+    setTimeout(() => {
+      blinkEl.style.opacity = '0';
+      blinkEl.classList.remove('blink-active');
+      cb();
+    }, 250);
+  }
+
+  toggle.addEventListener('click', () => {
+    blinkThen(() => {
+      const open = !panel.classList.contains('hidden');
+      if (open) {
+        panel.classList.add('hidden');
+        label.textContent = 'MENU';
+      } else {
+        panel.classList.remove('hidden');
+        label.textContent = 'CLOSE';
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    blinkThen(() => {
+      panel.classList.add('hidden');
+      label.textContent = 'MENU';
+    });
+  });
+</script>
+
+
+
+  <script>
+    // stacked menu hover push
+    const items = Array.from(document.querySelectorAll('.stack-item'));
+    items.forEach((el, i) => {
+      el.addEventListener('mouseenter', () => {
+        for (let j = i + 1; j < items.length; j++) {
+          items[j].style.transform = 'translateY(20px)';
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        for (let j = i + 1; j < items.length; j++) {
+          items[j].style.transform = '';
+        }
+      });
+    });
+
+    // menu toggle
+    const navbar = document.querySelector('.navbar');
+    const close = document.querySelector('.close');
+    const menu = document.querySelector('.menu');
+    menu.addEventListener('click', () => {
+      navbar.classList.remove('hidden');
+    });
+    close.addEventListener('click', () => {
+      navbar.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
