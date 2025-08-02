@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <title>AmpedUp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" /> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOM5Qb5G1zY+0ZsQ2e6g+vVbG6cFQpyN0yJf4yI5KX1Z6+2mF4b+V0Y5qQ6Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -320,29 +321,57 @@
 
   </div>
 
+
+
+
+
+
+
+
   <!-- HERO / FEATURED ARTICLE -->
-  <section class="max-w-7xl mx-auto px-6 mt-6 grid gap-6 md:grid-cols-3">
-    <!-- Big feature -->
-    <div class="md:col-span-2 relative overflow-hidden rounded-2xl">
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-[#784BA0]/40 via-[#2B86C5]/30 to-[#FF3CAC]/30 mix-blend-overlay">
-      </div>
-      <img src="" alt="Featured visual" class="w-full h-80 object-cover rounded-2xl" />
-      <div class="relative p-6 flex flex-col justify-end h-80">
-        <div class="text-sm uppercase tracking-widest text-[#FFB200] mb-2">Feature Focus</div>
-        <h1 class="text-4xl font-extrabold mb-2">The Weekly Spin</h1>
-        <p class="max-w-prose mb-4">
-          Each week we spotlight a sound that’s shaping vibe culture. From sleek sonic experiments to bold visual
-          storytelling, this is where rhythm meets design.
-        </p>
-        <a href="#"
-          class="inline-block px-5 py-3 bg-[#FF3CAC] rounded-full font-semibold hover:brightness-110 transition">
-          Read Full Story
-        </a>
-      </div>
+<section class="max-w-7xl mx-auto px-6 mt-6 flex flex-col">
+  <!-- Image block (big) -->
+  <div class="overflow-hidden rounded-2xl w-full mb-4">
+    <div id="back" class="w-full h-[700px] relative" style="position:relative;">
+      <img
+        src="https://imgs.search.brave.com/-9jXsfrsAa2O9PRvWi-Kiq0m7vaCE_QtYSu8eZEsWfQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vRUFGa0VQ/UG1GWm8vMi8wLzE2/MDB3L2NhbnZhLXNp/bXBsZS1tb2Rlcm4t/cGhvdG9ncmFwaHkt/bWlzc2VkLW11c2lj/LWFsYnVtLWNvdmVy/LWF0WTlTSVI3NE04/LmpwZw"
+        alt="Featured visual" class="absolute inset-0 w-full h-full object-cover rounded-2xl" />
+      <img
+        src="https://imgs.search.brave.com/ArQ50JDh3FYkafl5ppgPiZ-2FNSR057TJG41quo33Tw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudGVtcGxhdGUu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIyLzA2L3Bob3Rv/LWFsYnVtLWNvdmVy/LmpwZw"
+        alt="Featured visual" class="absolute inset-0 w-full h-full object-cover rounded-2xl" />
+      <img
+        src="https://imgs.search.brave.com/n_G1PGB1m1qnOBOJzQ88p8U-7Zm9Fm5DlhdeRdx5I7o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbGFj/ZWl0LWltZy0xLXAu/Y2RuLmF3cy5wbGFj/ZWl0Lm5ldC91cGxv/YWRzL3N0YWdlL3N0/YWdlX2ltYWdlLzE5/MTE3NC9vcHRpbWl6/ZWRfcHJvZHVjdF90/aHVtYl9zdGFnZS5q/cGc"
+        alt="Featured visual fallback"
+        class="absolute inset-0 w-full h-full object-cover rounded-2xl"
+        onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=860&q=80'"/>
+      <img
+        src="https://imgs.search.brave.com/IxqiHLyRdxvj0fvNO8GCxWx-7Z7Br9bE9GdK7dnvhGY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbGFj/ZWl0LWltZy0xLXAu/Y2RuLmF3cy5wbGFj/ZWl0Lm5ldC91cGxv/YWRzL3N0YWdlL3N0/YWdlX2ltYWdlLzgz/NDI5L29wdGltaXpl/ZF9wcm9kdWN0X3Ro/dW1iX3N0YWdlLmpw/Zw"
+        alt="Featured visual" class="absolute inset-0 w-full h-full object-cover rounded-2xl" />
+      <img
+        src="https://imgs.search.brave.com/9xt5-E9SoIfnvdMHMr-rLbck6Zj80wmYXvuglFMC-EE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jcmVh/dGl2ZXJldmlldy5p/bWdpeC5uZXQvY29u/dGVudC91cGxvYWRz/LzIwMjQvMTIvdHls/ZXItdGhlLWNyZWF0/b3ItY2hyb21ha29w/aWEuanBnP2F1dG89/Y29tcHJlc3MsZm9y/bWF0JnE9NjAmdz0x/MjAwJmg9MTE4OQ"
+        alt="Featured visual" class="absolute inset-0 w-full h-full object-cover rounded-2xl" />
     </div>
-    
-  </section>
+  </div>
+
+  <!-- Text below image -->
+  <div class="relative p-6 flex flex-col justify-start">
+    <div class="text-sm uppercase tracking-widest text-[#FFB200] mb-2">Feature Focus</div>
+    <h1 class="text-5xl font-extrabold mb-2">The Weekly Spin</h1>
+    <p class="max-w-prose mb-4">
+      Each week we spotlight a sound that’s shaping vibe culture. From sleek sonic experiments to bold visual
+      storytelling, this is where rhythm meets design.
+    </p>
+    <a href="#"
+      class="inline-block px-6 py-3 bg-[#FF3CAC] rounded-full font-semibold hover:brightness-110 transition">
+      Read Full Story
+    </a>
+  </div>
+</section>
+
+
+
+
+
 
 
 
@@ -942,6 +971,117 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 
 
+
+  
+  <!--  Gsap is needed for Basic Effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Scroll Trigger is needed for Scroll Effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Three.js is needed for 3d Effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+  
+  <!-- ControlKit is needed for Debug Panel -->
+  <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+
+  <script type="text/javascript" src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
+
+
+
+
+
+
+
+  <!-- lock scroll until back images settle and initialize Shery -->
+<script>
+  // lock immediately
+  document.body.style.overflow = "hidden";
+
+  function waitForBackImagesThenUnlockAndInit() {
+    const container = document.getElementById("back");
+    if (!container) {
+      document.body.style.overflow = "";
+      return;
+    }
+    const imgs = Array.from(container.querySelectorAll("img"));
+    if (!imgs.length) {
+      document.body.style.overflow = "";
+      initShery();
+      return;
+    }
+
+    let remaining = imgs.length;
+    const checkDone = () => {
+      remaining--;
+      if (remaining <= 0) {
+        setTimeout(() => {
+          document.body.style.overflow = "";
+          initShery();
+        }, 300); // small buffer
+      }
+    };
+
+    imgs.forEach(img => {
+      if (img.complete) {
+        checkDone();
+      } else {
+        img.addEventListener("load", checkDone);
+        img.addEventListener("error", checkDone);
+      }
+    });
+  }
+
+  function initShery() {
+    if (typeof Shery !== "undefined") {
+      Shery.imageEffect("#back", { style: 5, config:{
+    a: { value: 9.39, range: [0, 30] },
+    b: { value: -0.98, range: [-1, 1] },
+    zindex: { value: 2, range: [-9999999, 9999999] },
+    aspect: { value: 1.76 },
+    ignoreShapeAspect: { value: true },
+    shapePosition: { value: { x: 0, y: 0 } },
+    shapeScale: { value: { x: 0.5, y: 0.5 } },
+    shapeEdgeSoftness: { value: 0, range: [0, 0.5] },
+    shapeRadius: { value: 0, range: [0, 2] },
+    currentScroll: { value: 0 },
+    scrollLerp: { value: 0.07 },
+    gooey: { value: true },
+    infiniteGooey: { value: true },
+    growSize: { value: 3.46, range: [1, 15] },
+    durationOut: { value: 1, range: [0.1, 5] },
+    durationIn: { value: 1.5, range: [0.1, 5] },
+    displaceAmount: { value: 0.5 },
+    masker: { value: true },
+    maskVal: { value: 1.76, range: [1, 5] },
+    scrollType: { value: 0 },
+    geoVertex: { value: 1, range: [1, 64] },
+    noEffectGooey: { value: false },
+    onMouse: { value: 2 },
+    noise_speed: { value: 2.67, range: [0, 10] },
+    metaball: { value: 0.53, range: [0, 2] },
+    discard_threshold: { value: 0.5, range: [0, 1] },
+    antialias_threshold: { value: 0.01, range: [0, 0.1] },
+    noise_height: { value: 0.5, range: [0, 2] },
+    noise_scale: { value: 10, range: [0, 100] }
+  } ,gooey:true });
+    } else {
+      console.warn("Shery not loaded");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    waitForBackImagesThenUnlockAndInit();
+  });
+</script>
+
+
+
+
+
+  <script src="src/script.js"></script>
+
+  
 </body>
 
 </html>
