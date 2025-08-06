@@ -1,0 +1,24 @@
+# AmpedUp — Music Magazine Web 🎧
+🔗 Live: [https://pixxelhack-x415.vercel.app/]
+🔗 Code: [https://github.com/neelamPatidar-415/Pixxelhack]
+
+# 🚀 Overview
+AmpedUp is a slick, vibrant music magazine site built in a 36hr sprint during PixxelHack Round 1. It's all about vibes, visual punch, and smooth interactions — from hero animations to dynamic artist showcases.
+
+# 🎯 Tech Stack
+Frontend Only:
+HTML, CSS, JavaScript
+🎨 TailwindCSS for fast UI
+
+# 🔧 Core Highlights
+Hero section with rising text & sliding color loops
+
+Artist reveal section on hover
+
+Fully responsive + scroll-based transitions
+
+Built as a duo project in pure frontend
+
+# ⚡ Team
+Built by Neelam Patidar & Yash Agrawal
+
