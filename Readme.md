@@ -1,5 +1,5 @@
 # 🎧 AmpedUp — Music Magazine Web  
-🔗 [Live Site](https://pixxelhack-x415.vercel.app/)  
+🔗 [Live Site](https://pixxelhack.onrender.com/)  
 🔗 [Code Repository](https://github.com/neelamPatidar-415/Pixxelhack)
 
 
